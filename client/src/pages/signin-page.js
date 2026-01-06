@@ -1,4 +1,4 @@
-import { multiSetAttributes, addMultiElems } from "@utils";
+import { multiSetAttributes, addMultiCloneElems } from "@utils";
 
 class SigninPage {
   render() {
@@ -54,11 +54,14 @@ class SigninPage {
       signinPageFormControlInput
     );
 
-    addMultiElems(
+    signinPageFormWrapper.appendChild(signinPageFormControl);
+
+    addMultiCloneElems(
       signinPageFormWrapper,
       signinPageFormControl,
       1,
-      [{for: 'password'},
+      [
+        { for: "password" },
         {
           id: "password",
           name: "password",
@@ -70,7 +73,14 @@ class SigninPage {
       "Введите пароль"
     );
 
-    signinPageFormWrapper.appendChild(signinPageFormControl);
+    const signinPageFormBtn = document.createElement("button");
+    multiSetAttributes(signinPageFormBtn, {
+      type: "submit",
+      class: "button signinPage__form-btn",
+    });
+    signinPageFormBtn.textContent = "Войти";
+
+    signinPageFormWrapper.appendChild(signinPageFormBtn);
 
     signinPageForm.appendChild(signinPageFormWrapper);
 
@@ -86,45 +96,6 @@ class SigninPage {
 
     return main;
   }
-}
-
-{
-  /* <section class="signinPage">
-  <div class="container">
-    <div class="signinPage__wrapper">
-      <div class="signinPage__inner">
-        <h2 class="signinPage__title">Войти в систему</h2>
-        <form id="signPageForm" class="signinPage__form">
-          <div class="signinPage__form-wrapper">
-            <div class="signinPage__formControl">
-              <label for="email">Введите email</label>
-              <input
-                id="email"
-                class="input"
-                type="email"
-                name="email"
-                placeholder="Enter email..."
-              />
-            </div>
-            <div class="signinPage__formControl">
-              <label for="password">Введите пароль</label>
-              <input
-                id="password"
-                class="input"
-                type="password"
-                name="password"
-                placeholder="Enter password..."
-              />
-            </div>
-            <button type="submit" class="button signinPage__form-btn">
-              Войти
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>; */
 }
 
 export { SigninPage };
