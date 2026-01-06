@@ -1,0 +1,20 @@
+{
+  "name": "dashboard-vanilla-js-client",
+  "version": "1.0.0",
+  "description": "Organizational structure of the company. Client part.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "http-server -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vanilla-js",
+    "javascript",
+    "css"
+  ],
+  "author": "makarovskyi.v@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

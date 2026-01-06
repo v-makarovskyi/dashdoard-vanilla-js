@@ -1,0 +1,34 @@
+.container {
+  margin: 0 auto;
+  padding-inline: 20px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+.input {
+  background-color: var(--white);
+  border: 1px solid var(--border-color-main);
+  color: var(--black);
+  font-size: 14px;
+  height: 56px;
+  width: 100%;
+  outline: none;
+  padding-inline: 26px;
+}
+
+.input:focus {
+  border-color: var(--depDesign);
+  border-width: 2px;
+}
+
+.input::placeholder {
+  color: var(--shadow-light);
+}
+
+.input:focus::placeholder {
+  opacity: 0;
+}

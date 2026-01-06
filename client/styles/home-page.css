@@ -1,0 +1,167 @@
+.homePage__title {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .homePage__wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .homePage__director {
+    position: relative;
+    padding: 20px 50px;
+    border-radius: var(--borderRadius);
+    background-color: var(--mainCompany);
+    color: var(--white);
+    font-size: 1.5rem;
+  }
+  
+  .arrow {
+    position: absolute;
+    clip-path: polygon(
+      39% 70%,
+      30% 0,
+      65% 0,
+      59% 71%,
+      80% 72%,
+      49% 100%,
+      17% 70%
+    );
+    width: 20px;
+    height: 50px;
+    background-color: black;
+  }
+  
+  div[class~="arrow-director"] {
+    width: 33px;
+    height: 120px;
+    background-color: var(--mainCompany);
+  }
+  
+  div[class~="arrow-director"].left {
+    transform: rotate(45deg);
+    bottom: -147px;
+    left: 10%;
+  }
+  
+  div[class~="arrow-director"].right {
+    rotate: -45deg;
+    bottom: -147px;
+    right: 10%;
+  }
+  
+  div[class~="arrow-department"] {
+    top: 70px;
+    left: 45%;
+  }
+  
+  div[class~="arrow-department"].left {
+    background-color: var(--depWeb);
+  }
+  div[class~="arrow-department"].right {
+    background-color: var(--depDesign);
+  }
+  
+  div[class~="arrow-branch"] {
+    top: 21px;
+    width: 40px;
+    height: 30px;
+  }
+  
+  div[class~="arrow-branch"].left {
+    right: -50px;
+    background-color: var(--depWeb);
+    rotate: 60deg;
+  }
+  
+  div[class~="arrow-branch"].right {
+    left: -50px;
+    background-color: var(--depDesign);
+    rotate: -60deg;
+  }
+  
+  div[class*="arrow-count"] {
+    top: 112px;
+    width: 45px;
+    height: 400px;
+    left: 48%;
+    background-color: lightblue;
+  }
+  
+  .homePage__department-wrapper {
+    padding: 145px 15px 70px;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+  
+  .homePage__department-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 40%;
+    row-gap: 80px;
+  }
+  
+  .homePage__department-main {
+    min-width: 100%;
+    position: relative;
+    align-self: center;
+    padding: 15px 40px;
+    border-radius: var(--borderRadius);
+    color: var(--white);
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  
+  .homePage__department-item.left .homePage__department-main {
+    background-color: var(--depWeb);
+  }
+  
+  .homePage__department-item.right .homePage__department-main {
+    background-color: var(--depDesign);
+  }
+  
+  .homePage__branches {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+  }
+  
+  .homePage__branches-item {
+    position: relative;
+    padding: 20px 50px 12px 50px;
+    font-size: 1.2rem;
+    border: 2px solid black;
+    border-radius: var(--borderRadius);
+    text-align: center;
+  }
+  
+  .homePage__branches-item::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 22%;
+  }
+  
+  .homePage__branches-item.left::before {
+    background-color: var(--depWeb);
+  }
+  .homePage__branches-item.right::before {
+    background-color: var(--depDesign);
+  }
+  
+  .homePage__counting {
+    padding: 20px 50px;
+    border-radius: var(--borderRadius);
+    background-color: lightblue;
+    font-size: 1.3rem;
+  }
+  
