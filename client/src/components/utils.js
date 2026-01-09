@@ -5,7 +5,7 @@ function multiSetAttributes(element, attrs) {
   }
 }
 
-function addMultiElems(
+function addMultiCloneElems(
   parentElem,
   childElem,
   qty,
@@ -35,4 +35,5 @@ function addMultiElems(
   }
 }
 
-export { multiSetAttributes, addMultiElems };
+
+export { multiSetAttributes, addMultiCloneElems };
