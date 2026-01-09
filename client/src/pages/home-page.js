@@ -1,8 +1,7 @@
-import { multiSetAttributes, addMultiElems } from "@utils";
+import { multiSetAttributes, addMultiCloneElems } from "@utils";
 
 class HomePage {
   render() {
-    const main = document.createElement("main");
     const homePage = document.createElement('section')
     homePage.setAttribute('class', 'homePage')
 
@@ -81,7 +80,7 @@ class HomePage {
     ArrowBranchLeft.setAttribute("class", "arrow arrow-branch left");
     homePageBranchesItemLeft.appendChild(ArrowBranchLeft);
     homePageBranchesLeft.append(homePageBranchesItemLeft);
-    addMultiElems(
+    addMultiCloneElems(
       homePageBranchesLeft,
       homePageBranchesItemLeft,
       1,
@@ -138,7 +137,7 @@ class HomePage {
     ArrowBranchRight.setAttribute("class", "arrow arrow-branch right");
     homePageBranchesItemRight.appendChild(ArrowBranchRight);
     homePageBranchesRight.append(homePageBranchesItemRight);
-    addMultiElems(
+    addMultiCloneElems(
       homePageBranchesRight,
       homePageBranchesItemRight,
       1,
@@ -175,8 +174,8 @@ class HomePage {
 
     container.append(title, homePageWrapper);
     homePage.appendChild(container)
-    main.appendChild(homePage);
-    return main;
+    
+    return homePage;
   }
 }
 
