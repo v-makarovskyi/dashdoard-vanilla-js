@@ -2,8 +2,6 @@ import { multiSetAttributes, addMultiCloneElems } from "@utils";
 
 class SigninPage {
   render() {
-    const main = document.createElement("main");
-
     const signinPage = document.createElement("section");
     signinPage.setAttribute("class", "signinPage");
 
@@ -92,9 +90,7 @@ class SigninPage {
 
     signinPage.appendChild(container);
 
-    main.appendChild(signinPage);
-
-    return main;
+    return signinPage;
   }
 }
 
