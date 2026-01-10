@@ -8,22 +8,22 @@ class Header {
     container.setAttribute("class", "container");
     const headerActions = document.createElement("div");
     headerActions.setAttribute("class", "header__actions");
-    const headerActionsBtn = document.createElement("button");
-    multiSetAttributes(headerActionsBtn, {
-      ['data-path']: "/",
+    const headerActionsLink = document.createElement("a");
+    multiSetAttributes(headerActionsLink, {
       href: "#/",
-      class: "button header__actions-btn",
+      ["data-path"]: "/",
+      class: "header__actions-link",
     });
-    headerActionsBtn.textContent = "На главную";
-    headerActions.append(headerActionsBtn);
+    headerActionsLink.textContent = "На главную";
+    headerActions.append(headerActionsLink);
     addMultiCloneElems(
       headerActions,
-      headerActionsBtn,
-      1,
+      headerActionsLink,
+      3,
       [
-        /* { id: "allEmployes", href: "allEmployes" },
-        { id: "search", href: "search" }, */
-        { ['data-path']: "/signin", href: "/#/signin" },
+        { href: "#/allEmployes", ["data-path"]: "allEmployes" },
+        { href: "#/search", ["data-path"]: "search" },
+        { href: "#/signin", ["data-path"]: "signin" },
       ],
       "Все сотрудники",
       "Детальный поиск",
@@ -35,15 +35,6 @@ class Header {
 
     return header;
   }
-
- /*  afterRender() {
-    Array.from(document.querySelectorAll(".header__actions-btn")).map((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault()
-        console.log(e)
-      })
-    })
-  }  */
 }
 
 export { Header };

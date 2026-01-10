@@ -12,6 +12,12 @@
   box-shadow: 0px 2px 8px 1px var(--shadow-light);
 }
 
-.header__actions-btn {
+.header__actions-link {
   background-color: var(--btn-primary);
+  color: var(--white);
+  display: inline-block;
+  padding: 10px;
+  border-radius: var(--borderRadius);
+  font-size: 14px;
+  line-height: 1;
 }
