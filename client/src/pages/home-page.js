@@ -1,9 +1,24 @@
 import { multiSetAttributes, addMultiCloneElems } from "@utils";
 
 class HomePage {
+  name;
+  #links;
+  constructor(name) {
+    this.name = name;
+    this.#links = [
+      "/#/company-part/director",
+      "/#/company-part/dep-web-dev",
+      "/#/company-part/frontend",
+      "/#/company-part/backend",
+      "/#/company-part/dep-web-design",
+      "/#/company-part/ui-ux",
+      "/#/company-part/ecommerce",
+      "/#/company-part/counting",
+    ];
+  }
   render() {
-    const homePage = document.createElement('section')
-    homePage.setAttribute('class', 'homePage')
+    const homePage = document.createElement("section");
+    homePage.setAttribute("class", "homePage");
 
     const container = document.createElement("div");
     container.setAttribute("class", "container");
@@ -17,7 +32,7 @@ class HomePage {
     const homePageDirector = document.createElement("div");
     homePageDirector.setAttribute("class", "homePage__director");
     const directorLink = document.createElement("a");
-    directorLink.setAttribute("href", "#");
+    directorLink.setAttribute("href", "/#/company-part/director");
     const directorTitle = document.createElement("span");
     directorTitle.textContent = "Директор предприятия";
     const arrowDirectorLeft = document.createElement("div");
@@ -48,7 +63,10 @@ class HomePage {
       "homePage__department-main"
     );
     const homePageDepartmentMainLinkLeft = document.createElement("a");
-    homePageDepartmentMainLinkLeft.setAttribute("href", "#");
+    homePageDepartmentMainLinkLeft.setAttribute(
+      "href",
+      "/#/company-part/dep-web-dev"
+    );
     const homePageDepartmentMainTitleLeft = document.createElement("span");
     homePageDepartmentMainTitleLeft.textContent = "Департамент web-разработки";
     homePageDepartmentMainLinkLeft.appendChild(homePageDepartmentMainTitleLeft);
@@ -69,7 +87,7 @@ class HomePage {
     );
     const homePageBranchesItemLeftLink = document.createElement("a");
     multiSetAttributes(homePageBranchesItemLeftLink, {
-      href: "#",
+      href: "/#/company-part/depdev/frontend",
       class: "homePage__branches-link",
     });
     const homePageBranchesItemLeftTitle = document.createElement("span");
@@ -84,7 +102,7 @@ class HomePage {
       homePageBranchesLeft,
       homePageBranchesItemLeft,
       1,
-      [],
+      [{ href: "/#/company-part/backend" }],
       "backend отдел"
     );
 
@@ -104,7 +122,11 @@ class HomePage {
       "homePage__department-main"
     );
     const homePageDepartmentMainLinkRight = document.createElement("a");
-    homePageDepartmentMainLinkLeft.setAttribute("href", "#");
+    homePageDepartmentMainLinkRight.setAttribute(
+      "href",
+      "/#/company-part/depdesign"
+    );
+
     const homePageDepartmentMainTitleRight = document.createElement("span");
     homePageDepartmentMainTitleRight.textContent = "Департамент web-дизайна";
     homePageDepartmentMainLinkRight.appendChild(
@@ -126,9 +148,10 @@ class HomePage {
     );
     const homePageBranchesItemRightLink = document.createElement("a");
     multiSetAttributes(homePageBranchesItemRightLink, {
-      href: "#",
+      href: "/#/company-part/ui-ux",
       class: "homePage__branches-link",
     });
+
     const homePageBranchesItemRightTitle = document.createElement("span");
     homePageBranchesItemRightTitle.textContent = "UI/UX отдел";
     homePageBranchesItemRightLink.appendChild(homePageBranchesItemRightTitle);
@@ -141,7 +164,7 @@ class HomePage {
       homePageBranchesRight,
       homePageBranchesItemRight,
       1,
-      [],
+      [{ href: "/#/company-part/ecommerce" }],
       "ecommerce отдел"
     );
 
@@ -158,7 +181,7 @@ class HomePage {
     const homePageCounting = document.createElement("div");
     homePageCounting.setAttribute("class", "homePage__counting");
     const homePageCountingLink = document.createElement("a");
-    homePageCountingLink.setAttribute("href", "#");
+    homePageCountingLink.setAttribute("href", "/#/company-part/counting");
     const homePageCountingTitle = document.createElement("span");
     homePageCountingTitle.textContent = "Бухгалтерия";
     homePageCountingLink.appendChild(homePageCountingTitle);
@@ -173,12 +196,18 @@ class HomePage {
     );
 
     container.append(title, homePageWrapper);
-    homePage.appendChild(container)
-    
+    homePage.appendChild(container);
+
     return homePage;
   }
+  /* afterRender() {
+    document
+      .querySelector(".homePage")
+      .querySelectorAll("a")
+      .forEach((link, idx) => {
+        link.setAttribute("href", this.#links[idx]);
+      });
+  } */
 }
 
 export { HomePage };
-
-

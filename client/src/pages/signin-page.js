@@ -1,6 +1,10 @@
 import { multiSetAttributes, addMultiCloneElems } from "@utils";
 
 class SigninPage {
+  name;
+  constructor(name) {
+    this.name = name;
+  }
   render() {
     const signinPage = document.createElement("section");
     signinPage.setAttribute("class", "signinPage");

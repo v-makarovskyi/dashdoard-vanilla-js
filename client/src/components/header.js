@@ -1,6 +1,10 @@
 import { multiSetAttributes, addMultiCloneElems } from "@utils";
 
 class Header {
+  name;
+  constructor(name) {
+    this.name = name;
+  }
   render() {
     const header = document.createElement("header");
     multiSetAttributes(header, { id: "header-box", class: "header" });
@@ -10,7 +14,7 @@ class Header {
     headerActions.setAttribute("class", "header__actions");
     const headerActionsLink = document.createElement("a");
     multiSetAttributes(headerActionsLink, {
-      href: "#/",
+      href: "/#/",
       ["data-path"]: "/",
       class: "header__actions-link",
     });
@@ -21,9 +25,9 @@ class Header {
       headerActionsLink,
       3,
       [
-        { href: "#/allEmployes", ["data-path"]: "allEmployes" },
-        { href: "#/search", ["data-path"]: "search" },
-        { href: "#/signin", ["data-path"]: "signin" },
+        { href: "/#/allEmployees", ["data-path"]: "allEmployees" },
+        { href: "/#/search", ["data-path"]: "search" },
+        { href: "/#/signin", ["data-path"]: "signin" },
       ],
       "Все сотрудники",
       "Детальный поиск",

@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id         String     @id @default(nanoid(6))
+  name       String     @map("company_name")
+  slug       String     @unique @map("company_slug")
+  created_at DateTime   @default(now()) @db.Timestamptz(1)
+  branch     Branch[]
+  employees  Employee[]
+
+  @@map("company")
+}
+
+model Department {
+  id          String     @id @default(nanoid(6))
+  name        String     @map("dep_name") @db.VarChar(30)
+  slug        String     @unique @map("dep_slug") @db.VarChar(50)
+  description String     @map("dep_description")
+  created_at  DateTime   @default(now()) @db.Timestamptz(1)
+  branches    Branch[]
+  employees   Employee[]
+
+  @@map("departments")
+}
+
+model Branch {
+  id           String      @id @default(nanoid(6))
+  name         String      @map("branch_name") @db.VarChar(30)
+  slug         String      @unique @map("branch_slug") @db.VarChar(50)
+  description  String      @map("branch_description")
+  company      Company?    @relation(fields: [companyId], references: [id])
+  companyId    String?
+  department   Department? @relation(fields: [departmentId], references: [id])
+  departmentId String?
+  created_at   DateTime    @default(now()) @db.Timestamptz(1)
+
+  employees Employee[]
+
+  @@map("branches")
+}
+
+model Address {
+  id         String   @id @default(nanoid(6))
+  index      String   @map("a_index")
+  country    String   @map("a_country")
+  city       String   @map("a_city")
+  street     String   @map("a_street")
+  building   String   @map("a_building")
+  num        String   @map("a_num")
+  created_at DateTime @default(now()) @db.Timestamptz(1)
+  employeeId String   @unique
+  employee   Employee @relation(fields: [employeeId], references: [id])
+
+  @@map("addresses")
+}
+
+model Employee {
+  id           String      @id @default(nanoid(6))
+  job_title    String
+  first_name   String
+  last_name    String
+  slug         String?
+  description  String?
+  birthday     DateTime    @db.Date
+  email        String      @unique
+  tel          String
+  address      Address?
+  isAdmin      Boolean     @default(false)
+  company      Company?    @relation(fields: [companyId], references: [id])
+  companyId    String?
+  department   Department? @relation(fields: [departmentId], references: [id])
+  departmentId String?
+  branch       Branch?     @relation(fields: [branchId], references: [id])
+  branchId     String?
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @updatedAt @db.Timestamptz(1)
+
+  @@map("employees")
+}

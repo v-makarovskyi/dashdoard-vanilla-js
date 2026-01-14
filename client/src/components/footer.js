@@ -1,9 +1,13 @@
 import { multiSetAttributes } from "@utils";
 
 class Footer {
+  name;
+  constructor(name) {
+    this.name = name;
+  }
   render() {
     const footer = document.createElement("footer");
-    footer.setAttribute('class', 'footer')
+    footer.setAttribute("class", "footer");
     const container = document.createElement("div");
     container.setAttribute("class", "container");
     const footerInfo = document.createElement("div");
@@ -17,7 +21,7 @@ class Footer {
     });
     footerInfoContacts.innerHTML = "makarovskyi.v@gmail.com &nbsp;✅";
     footerInfo.append(footerInfoCopyright, footerInfoContacts);
-    container.appendChild(footerInfo)
+    container.appendChild(footerInfo);
     footer.appendChild(container);
 
     return footer;

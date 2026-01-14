@@ -4,11 +4,11 @@
   padding-block: 10px;
   padding-inline: 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   outline: none;
   cursor: pointer;
   background-color: black;
-  color: white;
+  color: var(--white);
 }
 
 /* button common end*/
