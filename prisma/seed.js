@@ -1,65 +1,8 @@
 const db = require("./db");
 const chalk = require("chalk");
 const seedData = require("./dataForSeed");
-
-/* async function main() {
-  await Promise.all(
-    seedData.employeesData.map(async (employee) => {
-      return await db.employee.create({
-        data: {
-          job_title: employee.jobTitle,
-          first_name: employee.firsName,
-          last_name: employee.lastName,
-          slug: employee.slug,
-          description: employee.description,
-          birthday: employee.birthday,
-          email: employee.email,
-          tel: employee.tel,
-          address: {
-            create: {
-              index: employee.address.index,
-              country: employee.address.country,
-              city: employee.address.city,
-              street: employee.address.street,
-              building: employee.address.building,
-              num: employee.address.num,
-            },
-          },
-          isAdmin: employee.isAdmin,
-          company: {
-            connectOrCreate: {
-              where: { slug: employee?.company?.slug },
-              create: {
-                name: employee?.company?.name,
-                slug: employee?.company?.slug,
-              },
-            },
-          },
-          department: {
-            connectOrCreate: {
-              where: { slug: employee?.department?.slug },
-              create: {
-                name: employee?.department?.name,
-                slug: employee?.department?.slug,
-                description: employee?.department?.description,
-              },
-            },
-          },
-          branch: {
-            connectOrCreate: {
-              where: { slug: employee?.branch?.slug },
-              create: {
-                name: employee?.branch?.name,
-                slug: employee?.branch?.slug,
-                description: employee?.branch?.description,
-              },
-            },
-          },
-        },
-      });
-    })
-  );
-} */
+const { request } = require("express");
+const bcrypt = require("bcrypt");
 
 async function main() {
   await Promise.all(
@@ -122,8 +65,8 @@ async function main() {
           description: emp?.description,
           birthday: emp.birthday,
           email: emp.email,
-          tel: emp.tel, 
-         address: {
+          tel: emp.tel,
+          address: {
             create: {
               index: emp.address.index,
               country: emp.address.country,
@@ -132,21 +75,22 @@ async function main() {
               building: emp.address.building,
               num: emp.address.num,
             },
-          },  
-         isAdmin: emp.isAdmin,
+          },
+          isAdmin: emp.isAdmin,
+          password: emp.password ? emp.password : undefined,
           company: emp.company
             ? { connect: { slug: emp.company.slug } }
-            : undefined, 
+            : undefined,
           department: emp.department
             ? {
                 connect: { slug: emp.department.slug },
               }
-            : undefined, 
-           branch: emp.branch
+            : undefined,
+          branch: emp.branch
             ? {
                 connect: { slug: emp.branch.slug },
               }
-            : undefined, 
+            : undefined,
         },
       });
     })

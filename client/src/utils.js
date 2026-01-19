@@ -46,7 +46,6 @@ function addMultiCloneElems(
 }
 
 function parseRequestUrl() {
-  const location = document.location
   const address = document.location.hash.slice(1);
   const url = address.toLowerCase() || "/";
   const r = url.split("/");

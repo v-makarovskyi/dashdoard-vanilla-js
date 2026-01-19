@@ -7,7 +7,7 @@
     "seed": "node prisma/seed.js"
   },
   "scripts": {
-    "debug": "DEBUG=dashboard:* nodemon index.js",
+    "debug": "NODE_ENV=development DEBUG=dashboard:* nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

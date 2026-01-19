@@ -1,4 +1,5 @@
 import { multiSetAttributes, addMultiCloneElems } from "@utils";
+import { getMainLinksForApp } from "../api/api.js";
 
 class HomePage {
   name;
@@ -16,7 +17,10 @@ class HomePage {
       "/#/company-part/counting",
     ];
   }
-  render() {
+  async render() {
+    const  { data } = await getMainLinksForApp()
+    console.log('data', data)
+
     const homePage = document.createElement("section");
     homePage.setAttribute("class", "homePage");
 
@@ -32,7 +36,7 @@ class HomePage {
     const homePageDirector = document.createElement("div");
     homePageDirector.setAttribute("class", "homePage__director");
     const directorLink = document.createElement("a");
-    directorLink.setAttribute("href", "/#/company-part/director");
+    directorLink.setAttribute("href", `/#/company-part/${data.employees[0].slug}`);
     const directorTitle = document.createElement("span");
     directorTitle.textContent = "Директор предприятия";
     const arrowDirectorLeft = document.createElement("div");
@@ -65,7 +69,7 @@ class HomePage {
     const homePageDepartmentMainLinkLeft = document.createElement("a");
     homePageDepartmentMainLinkLeft.setAttribute(
       "href",
-      "/#/company-part/dep-web-dev"
+      `/#/company-part/${data.employees[1].department.slug}`
     );
     const homePageDepartmentMainTitleLeft = document.createElement("span");
     homePageDepartmentMainTitleLeft.textContent = "Департамент web-разработки";
@@ -87,7 +91,7 @@ class HomePage {
     );
     const homePageBranchesItemLeftLink = document.createElement("a");
     multiSetAttributes(homePageBranchesItemLeftLink, {
-      href: "/#/company-part/depdev/frontend",
+      href: `/#/company-part/${data.employees[1].department.slug}/${data.employees[1].department.branches[1].slug}`,
       class: "homePage__branches-link",
     });
     const homePageBranchesItemLeftTitle = document.createElement("span");
@@ -102,7 +106,7 @@ class HomePage {
       homePageBranchesLeft,
       homePageBranchesItemLeft,
       1,
-      [{ href: "/#/company-part/backend" }],
+      [{ href: `/#/company-part/${data.employees[1].department.slug}/${data.employees[1].department.branches[0].slug}` }],
       "backend отдел"
     );
 
@@ -181,7 +185,7 @@ class HomePage {
     const homePageCounting = document.createElement("div");
     homePageCounting.setAttribute("class", "homePage__counting");
     const homePageCountingLink = document.createElement("a");
-    homePageCountingLink.setAttribute("href", "/#/company-part/counting");
+    homePageCountingLink.setAttribute("href", `/#/company-part/${data['branch'][0].slug}`);
     const homePageCountingTitle = document.createElement("span");
     homePageCountingTitle.textContent = "Бухгалтерия";
     homePageCountingLink.appendChild(homePageCountingTitle);

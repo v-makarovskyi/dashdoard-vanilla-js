@@ -26,9 +26,10 @@ const routes = {
   "/": homePage,
   "/signin": signinPage,
   "/company-part/:slug": companyPartPage,
+  "/company-part/:slug/:subSlug": companyPartPage,
 };
 
-function router() {
+async function router() {
   const request = parseRequestUrl();
   if (request.subSlug) {
     routes["/company-part/:slug/:subSlug"] = routes["/company-part/:slug"];
@@ -46,10 +47,10 @@ function router() {
 
 
   if (main.children.length === 0) {
-    main.appendChild(page.render());
+    main.appendChild(await page.render());
   } else {
     Array.from(main.children).map((child) => child.remove());
-    main.appendChild(page.render());
+    main.appendChild(await page.render());
   }
   rootBox.firstChild.insertAdjacentElement("afterend", main);
   if (page.afterRender) {
