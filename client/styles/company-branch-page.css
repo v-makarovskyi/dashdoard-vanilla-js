@@ -1,0 +1,51 @@
+.branchPage__wrapper {
+  height: calc(100vh - 150px);
+}
+
+.branchPage__content {
+  width: 450px;
+  max-width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 24px;
+  padding: 20px;
+}
+
+.branchPage__title {
+  font-size: 20px;
+}
+
+.branchPage__title > span {
+  font-size: 24px;
+  display: inline-block;
+  margin-left: 30px;
+  padding-inline: 15px;
+  padding-block: 10px;
+  background-color: lightblue;
+  border-radius: 5px;
+}
+
+.branchPage__employee-list {
+    padding-left: 20px;
+}
+
+.branchPage__employee-item {
+  position: relative;
+  padding: 15px 0px 15px 30px;
+  color: var(--depWeb);
+  font-size: 18px;
+  background-color: rgb(243, 243, 243);
+  border-radius: var(--borderRadius);
+}
+
+.branchPage__employee-item:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.branchPage__employee-link::after {
+  position: absolute;
+  top: 14px;
+  content: "\2192";
+  font-size: 20px;
+  margin-left: 10px;
+}

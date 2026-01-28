@@ -1,4 +1,4 @@
-import { multiSetAttributes, addMultiCloneElems } from "@utils";
+import { multiSetAttributes } from "@utils";
 
 class SigninPage {
   name;
@@ -57,22 +57,14 @@ class SigninPage {
     );
 
     signinPageFormWrapper.appendChild(signinPageFormControl);
-
-    addMultiCloneElems(
-      signinPageFormWrapper,
-      signinPageFormControl,
-      1,
-      [
-        { for: "password" },
-        {
-          id: "password",
-          name: "password",
-          type: "password",
-          class: "input",
-          placeholder: "Enter password...",
-        },
-      ],
-      "Введите пароль"
+    signinPageFormWrapper.insertAdjacentHTML(
+      "beforeend",
+      `
+    <div class='signinPage__formControl'>
+      <label for='[assword'>Введите пароль</label>
+      <input id='password' type='password' class='input' name='password'  placeholder='Enter password...'/>
+    </div>
+    `
     );
 
     const signinPageFormBtn = document.createElement("button");

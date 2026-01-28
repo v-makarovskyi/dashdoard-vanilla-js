@@ -1,21 +1,13 @@
-const { branch, company } = require("./db");
-
-exports.companyData = [
-  {
-    name: "Новый мир",
-    slug: "new-world",
-  },
-];
 exports.departmentData = [
   {
     name: "Департамент web-разработки",
-    slug: "dep-web-dev",
+    slug: "departmentWebDev",
     description:
       "Веб-разработка — это создание веб-сайтов и приложений, работающих в браузере, включая дизайн, верстку, программирование (клиентская и серверная части), тестирование и поддержку. Основные технологии: HTML, CSS, JavaScript для фронтенда; Python, Java для бэкенда, а также работа с серверами и базами данных. Это сложный процесс с четкими этапами, где участвуют разные специалисты: от дизайнеров до разработчиков.",
   },
   {
     name: "Департамент web-дизайна",
-    slug: "dep-web-design",
+    slug: "departmentWebDesign",
     description:
       "Веб-дизайн — это процесс создания визуального и функционального оформления сайтов и веб-приложений, объединяющий эстетику, удобство (UX/UI) и логику для привлечения и удержания пользователей, работающий с цветом, шрифтами, макетами и интерактивностью.",
   },
@@ -24,13 +16,13 @@ exports.departmentData = [
 exports.branchData = [
   {
     name: "frontend отдел",
-    slug: "frontend-branch",
+    slug: "branchFrontend",
     department: this.departmentData[0],
     description:
       "Фронтенд (Frontend) — это клиентская часть веб-сайта или приложения, всё, что пользователь видит, с чем взаимодействует в браузере, включая интерфейс, кнопки, формы, анимацию и отображение данных, создаваемое с помощью HTML, CSS и JavaScript. Задача фронтенд-разработчика — сделать продукт красивым, удобным, адаптивным для разных устройств и обеспечить взаимодействие пользователя с бэкенд-частью, отвечающей за логику и данные.",
   },
   {
-    name: "backend отдел",
+    name: "branchBackend",
     department: this.departmentData[0],
     slug: "backend-branch",
     description:
@@ -39,23 +31,22 @@ exports.branchData = [
   {
     name: "UI/UX отдел",
     department: this.departmentData[1],
-    slug: "ui-ix-branch",
+    slug: "branchUiUx",
     description:
       "UI/UX дизайн — это процесс создания удобных и привлекательных пользовательских интерфейсов для сайтов, приложений и других цифровых продуктов, где UX (User Experience) (опыт пользователя) отвечает за логику, структуру, функциональность и удобство использования (как «дом», в котором удобно жить), а UI (User Interface) (интерфейс пользователя) — за внешний вид: цвета, шрифты, кнопки и анимацию (как «дизайн» этого дома, его краска и декор).",
   },
   {
     name: "ecommerce отдел",
     department: this.departmentData[1],
-    slug: "ecommerce-branch",
+    slug: "branchEcommerce",
     description:
       "E-commerce дизайн — это комплексное проектирование внешнего вида и функционала интернет-магазина (или другой онлайн-платформы), направленное на создание удобного пользовательского опыта (UX) и улучшение конверсии, чтобы посетители легко находили товары и совершали покупки, что напрямую влияет на рост продаж. Он сочетает привлекательную визуальную эстетику с интуитивно понятной навигацией и процессом оформления заказа, делая онлайн-шопинг максимально простым и приятным для клиента.",
   },
   {
     name: "Бухгалтерия",
-    slug: "counting",
+    slug: "branchCounting",
     description:
       "Бухгалтерия — это структурное подразделение или система учета, отвечающая за сбор, регистрацию, систематизацию и анализ всей финансово-хозяйственной информации компании (доходы, расходы, активы, обязательства) для подготовки отчетности, контроля и принятия управленческих решений, включая расчет зарплат, налогов и взаимодействие с государственными органами.",
-    company: this.companyData[0],
   },
 ];
 
@@ -168,37 +159,34 @@ exports.employeesData = [
       "Крутой парень! Осуществляет общее рокуводство компанией и следит за тем, чтобы все работало как надо.",
     birthday: new Date("1978-03-12"),
     email: "kudasov@nw.test.com",
-    password: '123456',
+    password: "123456",
     tel: "+49-333-44-12",
     address: address[0],
     isAdmin: true,
-    company: this.companyData[0]
   },
   {
     jobTitle: "Руководитель департамента web-разработки",
     firsName: "Петр",
     lastName: "Лещенко",
-    slug: "head-dep-web-dev",
+    slug: "headDepartmentWebDev",
     birthday: new Date("1991-12-03"),
     email: "leschenko@nw.test.com",
     tel: "+1-234-33-44-12",
     address: address[1],
     isAdmin: false,
     department: this.departmentData[0],
-    company: this.companyData[0]
   },
   {
     jobTitle: "Руководитель департамента web-дизайна",
     firsName: "Андрей",
     lastName: "Литвинов",
-    slug: "head-dep-web-design",
+    slug: "headDepartmentWebDesign",
     birthday: new Date("1980-04-19"),
     email: "litvinov@nw.test.com",
     tel: "+38-067-123-12-33",
     address: address[2],
     isAdmin: false,
     department: this.departmentData[1],
-    company: this.companyData[0]
   },
   {
     jobTitle: "страрший сотрудник",
@@ -300,342 +288,12 @@ exports.employeesData = [
     jobTitle: "бухгалтер",
     firsName: "Дарья",
     lastName: "Долл",
-    slug: "head-counting",
+    slug: "headCountingBranch",
     birthday: new Date("1967-12-01"),
     email: "doll@nw.test.com",
     tel: "+38-044-367-89-01",
     address: address[11],
     isAdmin: false,
-    company: this.companyData[0],
-    branch: this.branchData[4]
+    branch: this.branchData[4],
   },
 ];
-
-/* exports.companyData = [
-  {
-    name: "Новый мир",
-    slug: "new-world",
-  },
-];
-
-exports.departmentData = [
-  {
-    name: "Директор",
-    company: this.companyData[0],
-    slug: "head",
-    description:
-      "Крутой парень! Осуществляет общее рокуводство компанией и следит за тем, чтобы все работало как надо.",
-  },
-  {
-    name: "Департамент web-разработки",
-    company: this.companyData[0],
-    slug: "dep-web-dev",
-    description:
-      "Веб-разработка — это создание веб-сайтов и приложений, работающих в браузере, включая дизайн, верстку, программирование (клиентская и серверная части), тестирование и поддержку. Основные технологии: HTML, CSS, JavaScript для фронтенда; Python, Java для бэкенда, а также работа с серверами и базами данных. Это сложный процесс с четкими этапами, где участвуют разные специалисты: от дизайнеров до разработчиков.",
-  },
-  {
-    name: "Департамент web-дизайна",
-    company: this.companyData[0],
-    slug: "dep-web-design",
-    description:
-      "Веб-дизайн — это процесс создания визуального и функционального оформления сайтов и веб-приложений, объединяющий эстетику, удобство (UX/UI) и логику для привлечения и удержания пользователей, работающий с цветом, шрифтами, макетами и интерактивностью.",
-  },
-  {
-    name: "Бухгалтерия",
-    company: this.companyData[0],
-    slug: "counting",
-    description:
-      "Бухгалтерия — это структурное подразделение или система учета, отвечающая за сбор, регистрацию, систематизацию и анализ всей финансово-хозяйственной информации компании (доходы, расходы, активы, обязательства) для подготовки отчетности, контроля и принятия управленческих решений, включая расчет зарплат, налогов и взаимодействие с государственными органами.",
-    company: this.companyData[0],
-  },
-];
-
-exports.branchData = [
-  {
-    name: "frontend отдел",
-    slug: "frontend-branch",
-    department: this.departmentData[1],
-    description:
-      "Фронтенд (Frontend) — это клиентская часть веб-сайта или приложения, всё, что пользователь видит, с чем взаимодействует в браузере, включая интерфейс, кнопки, формы, анимацию и отображение данных, создаваемое с помощью HTML, CSS и JavaScript. Задача фронтенд-разработчика — сделать продукт красивым, удобным, адаптивным для разных устройств и обеспечить взаимодействие пользователя с бэкенд-частью, отвечающей за логику и данные.",
-    company: this.companyData[0],
-  },
-  {
-    name: "backend отдел",
-    department: this.departmentData[1],
-    slug: "backend-branch",
-    description:
-      "Бэкенд (backend) — это «серверная» часть сайта или приложения, скрытая от пользователя, которая отвечает за «мозг» и «движок» проекта: обработку данных, работу с базами данных, бизнес-логику и взаимодействие с фронтендом (видимой частью). Разработчик бэкенда пишет код, который выполняется на сервере и обеспечивает весь функционал: сохранение информации, обработку платежей, авторизацию и многое другое, возвращая нужные данные фронтенду для отображения.",
-    company: this.companyData[0],
-  },
-  {
-    name: "UI/UX отдел",
-    department: this.departmentData[2],
-    slug: "ui-ix-branch",
-    description:
-      "UI/UX дизайн — это процесс создания удобных и привлекательных пользовательских интерфейсов для сайтов, приложений и других цифровых продуктов, где UX (User Experience) (опыт пользователя) отвечает за логику, структуру, функциональность и удобство использования (как «дом», в котором удобно жить), а UI (User Interface) (интерфейс пользователя) — за внешний вид: цвета, шрифты, кнопки и анимацию (как «дизайн» этого дома, его краска и декор).",
-    company: this.companyData[0],
-  },
-  {
-    name: "ecommerce отдел",
-    department: this.departmentData[2],
-    slug: "ecommerce-branch",
-    description:
-      "E-commerce дизайн — это комплексное проектирование внешнего вида и функционала интернет-магазина (или другой онлайн-платформы), направленное на создание удобного пользовательского опыта (UX) и улучшение конверсии, чтобы посетители легко находили товары и совершали покупки, что напрямую влияет на рост продаж. Он сочетает привлекательную визуальную эстетику с интуитивно понятной навигацией и процессом оформления заказа, делая онлайн-шопинг максимально простым и приятным для клиента.",
-    company: this.companyData[0],
-  },
-];
-
-const address = [
-  {
-    index: "123456",
-    country: "Украина",
-    city: "Киев",
-    street: "Кудряшова",
-    building: "12",
-    num: "35",
-  },
-  {
-    index: "007890",
-    country: "Украина",
-    city: "Киев",
-    street: "Бойчука",
-    building: "90",
-    num: "11",
-  },
-  {
-    index: "004567",
-    country: "Украина",
-    city: "Киев",
-    street: "Мира",
-    building: "44",
-    num: "86",
-  },
-  {
-    index: "123400",
-    country: "Украина",
-    city: "Киев",
-    street: "Тулузы",
-    building: "55",
-    num: "32",
-  },
-  {
-    index: "123456",
-    country: "Украина",
-    city: "Киев",
-    street: "Жюля Верна",
-    building: "127",
-    num: "309",
-  },
-  {
-    index: "898777",
-    country: "Украина",
-    city: "Киев",
-    street: "Зверинецкая",
-    building: "89",
-    num: "1",
-  },
-  {
-    index: "999999",
-    country: "Украина",
-    city: "Киев",
-    street: "Почайнинская",
-    building: "10",
-    num: "59",
-  },
-  {
-    index: "777888",
-    country: "Украина",
-    city: "Киев",
-    street: "Костельная",
-    building: "4",
-    num: "30",
-  },
-  {
-    index: "998767",
-    country: "Украина",
-    city: "Киев",
-    street: "Волошская",
-    building: "77",
-    num: "6",
-  },
-  {
-    index: "889000",
-    country: "Украина",
-    city: "Киев",
-    street: "Сырецкая",
-    building: "33-а",
-    num: "2",
-  },
-  {
-    index: "880022",
-    country: "Украина",
-    city: "Киев",
-    street: "Белицкая",
-    building: "9",
-    num: "19",
-  },
-  {
-    index: "123456",
-    country: "Украина",
-    city: "Киев",
-    street: "Порика",
-    building: "44",
-    num: "66",
-  },
-];
-
-exports.employeesData = [
-  {
-    jobTitle: "Директор",
-    firsName: "Дмитрий",
-    lastName: "Кудасов",
-    birthday: new Date("1978-03-12"),
-    email: "kudasov@nw.test.com",
-    tel: "+49-333-44-12",
-    address: address[0],
-    isAdmin: true,
-    company: this.companyData[0],
-    department: this.departmentData[0],
-  },
-  {
-    jobTitle: "Руководитель департамента web-разработки",
-    firsName: "Петр",
-    lastName: "Лещенко",
-    birthday: new Date("1991-12-03"),
-    email: "leschenko@nw.test.com",
-    tel: "+1-234-33-44-12",
-    address: address[1],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[1],
-  },
-  {
-    jobTitle: "Руководитель департамента web-дизайна",
-    firsName: "Андрей",
-    lastName: "Литвинов",
-    birthday: new Date("1980-04-19"),
-    email: "litvinov@nw.test.com",
-    tel: "+38-067-123-12-33",
-    address: address[2],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[2],
-  },
-  {
-    jobTitle: "страрший сотрудник",
-    firsName: "Николай",
-    lastName: "Петренко",
-    birthday: new Date("1969-06-02"),
-    email: "petrenko@nw.test.com",
-    tel: "+38-044-123-23-23",
-    address: address[3],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[1],
-    branch: this.branchData[0],
-  },
-  {
-    jobTitle: "сотрудник",
-    firsName: "Сергей",
-    lastName: "Ладыжинский",
-    birthday: new Date("1998-11-03"),
-    email: "ladyjinskyi@nw.test.com",
-    tel: "+34-123-22-33-44",
-    address: address[4],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[1],
-    branch: this.branchData[0],
-  },
-  {
-    jobTitle: "сотрудник",
-    firsName: "Виктор",
-    lastName: "Пак",
-    birthday: new Date("1979-07-12"),
-    email: "pack@mw.test.com",
-    tel: "+38-066-123-45-67",
-    address: address[5],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[1],
-    branch: this.branchData[1],
-  },
-  {
-    jobTitle: "сотрудник",
-    firsName: "Наталья",
-    lastName: "Каваева",
-    birthday: new Date("2001-04-22"),
-    email: "kavaeva@@nw.test.com",
-    tel: "+39-678-22-22-11",
-    address: address[6],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[1],
-    branch: this.branchData[1],
-  },
-  {
-    jobTitle: "сотрудник",
-    firsName: "Мария",
-    lastName: "Хавко",
-    birthday: new Date("2002-09-01"),
-    email: "havko@nw.test.com",
-    tel: "+38-093-222-77-80",
-    address: address[7],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[2],
-    branch: this.branchData[2],
-  },
-  {
-    jobTitle: "сотрудник",
-    firsName: "Ирина",
-    lastName: "Тишинская",
-    birthday: new Date("1988-06-24"),
-    email: "tishinskaya@nw.test.com",
-    tel: "+38-044-333-66-77",
-    address: address[8],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[2],
-    branch: this.branchData[2],
-  },
-  {
-    jobTitle: "страрший сотрудник",
-    firsName: "Евгений",
-    lastName: "Харченко",
-    birthday: new Date("1988-05-22"),
-    email: "ckharchenko@nw.test.com",
-    tel: "+39-555-12-34-55",
-    address: address[9],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[2],
-    branch: this.branchData[3],
-  },
-  {
-    jobTitle: "сотрудник",
-    firsName: "Владимир",
-    lastName: "Леонов",
-    birthday: new Date("2003-12-19"),
-    email: "leonov@nw.test.com",
-    tel: "+48-444-66-50-21",
-    address: address[10],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[2],
-    branch: this.branchData[3],
-  },
-  {
-    jobTitle: "бухгалтер",
-    firsName: "Дарья",
-    lastName: "Долл",
-    birthday: new Date("1967-12-01"),
-    email: "doll@nw.test.com",
-    tel: "+38-044-367-89-01",
-    address: address[11],
-    isAdmin: false,
-    company: this.companyData[0],
-    department: this.departmentData[3],
-  },
-];
- */

@@ -4,7 +4,7 @@ function useCors() {
     res.setHeader("Access-Control-Allow-Credentials", true);
     res.setHeader(
       "Access-Control-Allow-Headers",
-      "Content-Type, Authorization"
+      "Content-Type, Authorization, X-My"
     );
     res.setHeader(
       "Access-Control-Allow-Methods",

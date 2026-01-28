@@ -1,23 +1,9 @@
 const db = require("./db");
 const chalk = require("chalk");
 const seedData = require("./dataForSeed");
-const { request } = require("express");
 const bcrypt = require("bcrypt");
 
 async function main() {
-  await Promise.all(
-    seedData.companyData.map(async (c) => {
-      await db.company.upsert({
-        where: { slug: c.slug },
-        update: {},
-        create: {
-          name: c.name,
-          slug: c.slug,
-        },
-      });
-    })
-  );
-
   await Promise.all(
     seedData.departmentData.map(async (dep) => {
       await db.department.upsert({
@@ -41,9 +27,6 @@ async function main() {
           name: b.name,
           slug: b.slug,
           description: b.description,
-          company: b.company
-            ? { connect: { slug: b.company.slug } }
-            : undefined,
           department: b.department
             ? { connect: { slug: b.department.slug } }
             : undefined,
@@ -78,9 +61,6 @@ async function main() {
           },
           isAdmin: emp.isAdmin,
           password: emp.password ? emp.password : undefined,
-          company: emp.company
-            ? { connect: { slug: emp.company.slug } }
-            : undefined,
           department: emp.department
             ? {
                 connect: { slug: emp.department.slug },

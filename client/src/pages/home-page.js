@@ -1,25 +1,13 @@
-import { multiSetAttributes, addMultiCloneElems } from "@utils";
+import { multiSetAttributes } from "@utils";
 import { getMainLinksForApp } from "../api/api.js";
 
 class HomePage {
   name;
-  #links;
   constructor(name) {
     this.name = name;
-    this.#links = [
-      "/#/company-part/director",
-      "/#/company-part/dep-web-dev",
-      "/#/company-part/frontend",
-      "/#/company-part/backend",
-      "/#/company-part/dep-web-design",
-      "/#/company-part/ui-ux",
-      "/#/company-part/ecommerce",
-      "/#/company-part/counting",
-    ];
   }
   async render() {
-    const  { data } = await getMainLinksForApp()
-    console.log('data', data)
+    const { data } = await getMainLinksForApp();
 
     const homePage = document.createElement("section");
     homePage.setAttribute("class", "homePage");
@@ -36,7 +24,7 @@ class HomePage {
     const homePageDirector = document.createElement("div");
     homePageDirector.setAttribute("class", "homePage__director");
     const directorLink = document.createElement("a");
-    directorLink.setAttribute("href", `/#/company-part/${data.employees[0].slug}`);
+    directorLink.setAttribute("href", `/#/heads/head`);
     const directorTitle = document.createElement("span");
     directorTitle.textContent = "Директор предприятия";
     const arrowDirectorLeft = document.createElement("div");
@@ -69,7 +57,7 @@ class HomePage {
     const homePageDepartmentMainLinkLeft = document.createElement("a");
     homePageDepartmentMainLinkLeft.setAttribute(
       "href",
-      `/#/company-part/${data.employees[1].department.slug}`
+      `/#/departments/${data.depWebDev}`
     );
     const homePageDepartmentMainTitleLeft = document.createElement("span");
     homePageDepartmentMainTitleLeft.textContent = "Департамент web-разработки";
@@ -91,7 +79,7 @@ class HomePage {
     );
     const homePageBranchesItemLeftLink = document.createElement("a");
     multiSetAttributes(homePageBranchesItemLeftLink, {
-      href: `/#/company-part/${data.employees[1].department.slug}/${data.employees[1].department.branches[1].slug}`,
+      href: `/#/departmentWebDev/branches/${data.branchFront}`,
       class: "homePage__branches-link",
     });
     const homePageBranchesItemLeftTitle = document.createElement("span");
@@ -102,12 +90,17 @@ class HomePage {
     ArrowBranchLeft.setAttribute("class", "arrow arrow-branch left");
     homePageBranchesItemLeft.appendChild(ArrowBranchLeft);
     homePageBranchesLeft.append(homePageBranchesItemLeft);
-    addMultiCloneElems(
-      homePageBranchesLeft,
-      homePageBranchesItemLeft,
-      1,
-      [{ href: `/#/company-part/${data.employees[1].department.slug}/${data.employees[1].department.branches[0].slug}` }],
-      "backend отдел"
+
+    homePageBranchesLeft.insertAdjacentHTML(
+      "beforeend",
+      `
+      <div class='homePage__branches-item left'>
+        <a class='homePage__branches-link   href='/#/departmentWebDev/branches/${data.branchBack}'>
+          <span>backend отдел</span>
+        </a>
+        <div class='arrow arrow-branch left'></div>
+      </div>
+    `
     );
 
     homePageDepartmentItemLeft.append(
@@ -128,7 +121,7 @@ class HomePage {
     const homePageDepartmentMainLinkRight = document.createElement("a");
     homePageDepartmentMainLinkRight.setAttribute(
       "href",
-      "/#/company-part/depdesign"
+      `/#/departments/${data.depWebDesign}`
     );
 
     const homePageDepartmentMainTitleRight = document.createElement("span");
@@ -152,7 +145,7 @@ class HomePage {
     );
     const homePageBranchesItemRightLink = document.createElement("a");
     multiSetAttributes(homePageBranchesItemRightLink, {
-      href: "/#/company-part/ui-ux",
+      href: `/#/departmentWebDesign/branches/${data.branchUiUx}`,
       class: "homePage__branches-link",
     });
 
@@ -164,12 +157,17 @@ class HomePage {
     ArrowBranchRight.setAttribute("class", "arrow arrow-branch right");
     homePageBranchesItemRight.appendChild(ArrowBranchRight);
     homePageBranchesRight.append(homePageBranchesItemRight);
-    addMultiCloneElems(
-      homePageBranchesRight,
-      homePageBranchesItemRight,
-      1,
-      [{ href: "/#/company-part/ecommerce" }],
-      "ecommerce отдел"
+
+    homePageBranchesRight.insertAdjacentHTML(
+      "beforeend",
+      `
+      <div class='homePage__branches-item right'>
+        <a class='homePage__branches-link   href: '/#/departmentWebDesign/branches/${data.branchEcommerce}'>
+          <span>ecommerce отдел"</span>
+        </a>
+        <div class='arrow arrow-branch right'></div>
+      </div>
+    `
     );
 
     homePageDepartmentItemRight.append(
@@ -185,7 +183,7 @@ class HomePage {
     const homePageCounting = document.createElement("div");
     homePageCounting.setAttribute("class", "homePage__counting");
     const homePageCountingLink = document.createElement("a");
-    homePageCountingLink.setAttribute("href", `/#/company-part/${data['branch'][0].slug}`);
+    homePageCountingLink.setAttribute("href", `/#/${data.branchCounting}`);
     const homePageCountingTitle = document.createElement("span");
     homePageCountingTitle.textContent = "Бухгалтерия";
     homePageCountingLink.appendChild(homePageCountingTitle);
@@ -204,14 +202,6 @@ class HomePage {
 
     return homePage;
   }
-  /* afterRender() {
-    document
-      .querySelector(".homePage")
-      .querySelectorAll("a")
-      .forEach((link, idx) => {
-        link.setAttribute("href", this.#links[idx]);
-      });
-  } */
 }
 
 export { HomePage };

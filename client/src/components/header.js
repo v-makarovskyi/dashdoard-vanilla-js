@@ -1,4 +1,4 @@
-import { multiSetAttributes, addMultiCloneElems } from "@utils";
+import { multiSetAttributes } from "@utils";
 
 class Header {
   name;
@@ -20,18 +20,13 @@ class Header {
     });
     headerActionsLink.textContent = "На главную";
     headerActions.append(headerActionsLink);
-    addMultiCloneElems(
-      headerActions,
-      headerActionsLink,
-      3,
-      [
-        { href: "/#/allEmployees", ["data-path"]: "allEmployees" },
-        { href: "/#/search", ["data-path"]: "search" },
-        { href: "/#/signin", ["data-path"]: "signin" },
-      ],
-      "Все сотрудники",
-      "Детальный поиск",
-      "Выйти"
+    headerActions.insertAdjacentHTML(
+      "beforeend",
+      `
+      <a class='header__actions-link' href: "/#/allEmployees">Все сотрудники</a>
+      <a class='header__actions-link' href: href: "/#/search">Детальный поиск</a>
+      <a class='header__actions-link' href: "/#/signin">Выйти</a>
+    `
     );
 
     container.appendChild(headerActions);

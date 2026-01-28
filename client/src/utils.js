@@ -5,55 +5,31 @@ function multiSetAttributes(element, attrs) {
   }
 }
 
-function addMultiCloneElems(
-  parentElem,
-  childElem,
-  qty,
-  attrsArray,
-  ...textContents
-) {
-  let cloneElement;
-  for (let i = 0; i < qty; i++) {
-    cloneElement = childElem.cloneNode(true);
-    let childrens = Array.from(cloneElement.children);
-    //Для клонирования элементов, не имеющих потомков
-    if (childrens.length === 0) {
-      cloneElement.textContent = textContents[i];
-      if (attrsArray && attrsArray.length > 0) {
-        multiSetAttributes(cloneElement, attrsArray[i]);
-      }
-    } else if (childrens.length > 0) {
-      for (let i = 0; i < childrens.length; i++) {
-        //для форм
-        if (childrens[i].dataset.label) {
-          multiSetAttributes(childrens[i], attrsArray[i]);
-          childrens[i].textContent = textContents[i];
-        } else if (childrens[i].dataset.input) {
-          multiSetAttributes(childrens[i], attrsArray[i]);
-        } else if (
-          //только для главной страницы при рендере структуры компании
-          cloneElement.getAttribute("class") ===
-            "homePage__branches-item left" ||
-          cloneElement.getAttribute("class") === "homePage__branches-item right"
-        ) {
-          childrens[0].textContent = textContents[0];
-          multiSetAttributes(childrens[0], attrsArray[0]);
-        }
-      }
-    }
-    parentElem.appendChild(cloneElement);
-  }
-}
-
 function parseRequestUrl() {
+  /* console.log("ut location", document.location); */
   const address = document.location.hash.slice(1);
-  const url = address.toLowerCase() || "/";
+  /*  console.log("ut address", address); */
+  const url = address || "/";
   const r = url.split("/");
+  /*  console.log("ut r", r); */
 
   return {
     resource: r[1],
-    slug: r[2],
-    subSlug: (r[3] && isNaN(r[3])) ? r[3] : undefined
+    ...(r[1] === "heads" && r.length === 3 && { headSlug: r[2] }),
+    ...(r[1] === "heads" &&
+      r.length > 3 &&
+      r[2].startsWith("dep") && {
+        departmentSlug: r[2],
+        headDepartmentSlug: r[3],
+      }),
+    ...(r[1] === "departments" && { departmentSlug: r[2] }),
+    ...(((r[1] === "departmentWebDev" && r[2] === "branches") ||
+      (r[1] === "departmentWebDesign" && r[2] === "branches")) && {
+      branches: r[2],
+      branchSlug: r[3],
+    }),
+    /* slug: r[2],
+    subSlug: (r[3] && isNaN(r[3])) ? r[3] : undefined */
   };
 }
 
