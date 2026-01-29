@@ -15,7 +15,7 @@ let homePage = new HomePage("homePage");
 let signinPage = new SigninPage("signinPage");
 let companyDepartmentPage = new CompanyDepartmentPage("companyDepartmentPage");
 let employeeDetailPage = new EmployeeDetailPage("employeeDetailPage");
-let companyBranchPage = new CompanyBranchPage('companyBranchPage')
+let companyBranchPage = new CompanyBranchPage("companyBranchPage");
 
 const main = document.createElement("main");
 
@@ -38,16 +38,16 @@ const routes = {
   //маршруты руководства
   "/heads/:headSlug": employeeDetailPage,
   "/heads/:departmentSlug/:headDepartmentSlug": employeeDetailPage,
-  "/heads/:branchSlug/:headBranchSlug": employeeDetailPage,
   //маршрут на страницу сотрудника
   "/:departmentSlug/:branchSlug/:employeeId": employeeDetailPage,
+  "/branchCounting/:employeeId": employeeDetailPage,
   //страница входа для админа
   "/signin": signinPage,
 };
 
 async function router() {
   const request = parseRequestUrl();
-  /* console.log("request", request); */
+  console.log("request in main: ", request);
 
   const parseUrl =
     (request.resource
@@ -59,11 +59,10 @@ async function router() {
     (request.departmentSlug ? "/:departmentSlug" : "") +
     (request.headDepartmentSlug ? "/:headDepartmentSlug" : "") +
     (request.branches ? "/branches" : "") +
-    (request.branchSlug ? "/:branchSlug" : "");
-  /* console.log("parseUrl", parseUrl); */
+    (request.branchSlug ? "/:branchSlug" : "") +
+    (request.employee ? "/:employeeId" : "");
 
   let page = routes[parseUrl] ? routes[parseUrl] : null;
- /*  console.log('page', page); */
 
   if (main.children.length === 0) {
     main.appendChild(await page.render());

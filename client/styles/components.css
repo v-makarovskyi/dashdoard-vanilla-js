@@ -1,6 +1,7 @@
 /* button common start*/
 
 .button {
+  display: inline-block;
   padding-block: 10px;
   padding-inline: 15px;
   border: none;

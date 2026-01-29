@@ -1,5 +1,4 @@
 import { multiSetAttributes } from "@utils";
-import { parseRequestUrl } from "@utils";
 import { getDepartmentData } from "../api/api.js";
 
 class CompanyDepartmentPage {
@@ -8,8 +7,10 @@ class CompanyDepartmentPage {
     this.name = name;
   }
   async render() {
-    const parseUrl = parseRequestUrl();
-    const { data } = await getDepartmentData(parseUrl.departmentSlug);
+    const departmentSlug = document.location.hash.slice(1).split('/').filter(Boolean)[1]
+    const { data } = await getDepartmentData(departmentSlug);
+
+    const depDesign = data.department.slug === "departmentWebDesign";
 
     const companyPart = document.createElement("section");
     companyPart.setAttribute("class", "companyPart");
@@ -24,7 +25,10 @@ class CompanyDepartmentPage {
     companyPartInner.setAttribute("class", "companyPart__inner");
 
     const companyPartTitle = document.createElement("h1");
-    companyPartTitle.setAttribute("class", "companyPart__title");
+    companyPartTitle.setAttribute(
+      "class",
+      `${depDesign ? "companyPart__title depDesignBg" : "companyPart__title"}`
+    );
     const companyPartTitleContent = document.createTextNode(
       data.department.name
     );
@@ -62,7 +66,11 @@ class CompanyDepartmentPage {
     const companyPartSubordinateBranchesLink = document.createElement("a");
     multiSetAttributes(companyPartSubordinateBranchesLink, {
       href: `/#/${data.department.slug}/branches/${data.department.branches[0].slug}`,
-      class: "button companyPart__subordinateLink",
+      class: `${
+        depDesign
+          ? "button companyPart__subordinateLink depDesignBg"
+          : "button companyPart__subordinateLink"
+      }`,
     });
     companyPartSubordinateBranchesLink.textContent =
       data.department.branches[0].name;
@@ -75,7 +83,13 @@ class CompanyDepartmentPage {
     companyPartSubordinateBranches.insertAdjacentHTML(
       "beforeend",
       `
-      <a class='button companyPart__subordinateLink' href='/#/${data.department.slug}/branches/${data.department.branches[1].slug}'>${data.department.branches[1].name}</a>
+      <a class="${
+        depDesign
+          ? "button companyPart__subordinateLink depDesignBg"
+          : "button companyPart__subordinateLink"
+      }" href='/#/${data.department.slug}/branches/${
+        data.department.branches[1].slug
+      }'>${data.department.branches[1].name}</a>
     `
     );
 
@@ -89,20 +103,12 @@ class CompanyDepartmentPage {
     );
 
     const companyPartActionsLink = document.createElement("a");
-    companyPartActionsLink.textContent = "Сотрудник";
+    companyPartActionsLink.textContent = "На главную";
     multiSetAttributes(companyPartActionsLink, {
-      href: "/#/company-part",
+      href: "/#/",
       class: "button companyPart__actions-link",
-      "data-part": true,
     });
     companyPartActionsWrapper.appendChild(companyPartActionsLink);
-
-    companyPartActionsWrapper.insertAdjacentHTML(
-      "beforeend",
-      `
-      <a class='button companyPart__actions-link' href='/#/'>Домой</a>
-    `
-    );
 
     companyPartActions.appendChild(companyPartActionsWrapper);
 

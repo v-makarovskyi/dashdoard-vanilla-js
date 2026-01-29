@@ -1,4 +1,4 @@
-const db = require("../../prisma/db");
+const db = require("../prisma/db");
 
 exports.getAllLinksForHomePage = async (req, res, next) => {
   try {
@@ -113,3 +113,11 @@ exports.getBranch = async (req, res, next) => {
     console.error(error)
   }
 };
+
+exports.test = async(req, res, next) => {
+  const asd = await db.employee.findUnique({
+    where: {slug: 'head'}
+  })
+  
+  res.status(200).json(asd)
+}

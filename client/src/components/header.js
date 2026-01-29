@@ -23,9 +23,9 @@ class Header {
     headerActions.insertAdjacentHTML(
       "beforeend",
       `
-      <a class='header__actions-link' href: "/#/allEmployees">Все сотрудники</a>
-      <a class='header__actions-link' href: href: "/#/search">Детальный поиск</a>
-      <a class='header__actions-link' href: "/#/signin">Выйти</a>
+      <a class='header__actions-link' href="/#/allEmployees">Все сотрудники</a>
+      <a class='header__actions-link' href="/#/search">Детальный поиск</a>
+      <a class='header__actions-link' href="/#/signin">Выйти</a>
     `
     );
 

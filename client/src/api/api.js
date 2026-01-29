@@ -1,18 +1,17 @@
-import { parseRequestUrl } from "../utils.js";
 import { apiUrl } from "./config.js";
 
 async function getMainLinksForApp() {
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
   try {
-    const response = await fetch(`${apiUrl}/newWorld`, {
+    const response = await fetch(`${apiUrl}/newWorld/get-main-links`, {
       credentials: "include",
       headers: headers,
     });
     const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
+   if (!contentType || !contentType.includes("application/json")) {
       throw new TypeError("К нам приехал не JSON");
-    }
+    } 
     if (!response.ok) {
       throw new Error("Что-то пошло не так на домашней странице!");
     }

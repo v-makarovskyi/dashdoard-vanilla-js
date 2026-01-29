@@ -6,31 +6,36 @@ function multiSetAttributes(element, attrs) {
 }
 
 function parseRequestUrl() {
-  /* console.log("ut location", document.location); */
+  console.log("ut location", document.location);
   const address = document.location.hash.slice(1);
-  /*  console.log("ut address", address); */
+  console.log("ut address", address);
   const url = address || "/";
-  const r = url.split("/");
-  /*  console.log("ut r", r); */
+  const r = url.split("/").filter(Boolean);
+  console.log("ut r", r);
 
   return {
-    resource: r[1],
-    ...(r[1] === "heads" && r.length === 3 && { headSlug: r[2] }),
-    ...(r[1] === "heads" &&
-      r.length > 3 &&
-      r[2].startsWith("dep") && {
-        departmentSlug: r[2],
-        headDepartmentSlug: r[3],
+    resource: r[0],
+    ...(r[0] === "heads" && r.length === 2 && { headSlug: r[1] }),
+    ...(r[0] === "heads" &&
+      r.length > 2 &&
+      r[1].startsWith("dep") && {
+        departmentSlug: r[1],
+        headDepartmentSlug: r[2],
       }),
-    ...(r[1] === "departments" && { departmentSlug: r[2] }),
-    ...(((r[1] === "departmentWebDev" && r[2] === "branches") ||
-      (r[1] === "departmentWebDesign" && r[2] === "branches")) && {
-      branches: r[2],
-      branchSlug: r[3],
+    ...(r[0] !== void 0 &&
+      r[0].startsWith("dep") &&
+      r.length === 3 &&
+      r[2].startsWith("employee") && { branchSlug: r[1], employee: r[2] }),
+    ...(r[0] === "departments" && { departmentSlug: r[1] }),
+    ...(((r[0] === "departmentWebDev" && r[1] === "branches") ||
+      (r[0] === "departmentWebDesign" && r[1] === "branches")) && {
+      branches: r[1],
+      branchSlug: r[2],
     }),
+    ...(r[0] === 'branchCounting' && {employee: r[1]})
     /* slug: r[2],
     subSlug: (r[3] && isNaN(r[3])) ? r[3] : undefined */
   };
 }
 
-export { multiSetAttributes, addMultiCloneElems, parseRequestUrl };
+export { multiSetAttributes, parseRequestUrl };

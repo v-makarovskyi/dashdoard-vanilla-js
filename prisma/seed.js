@@ -60,7 +60,10 @@ async function main() {
             },
           },
           isAdmin: emp.isAdmin,
-          password: emp.password ? emp.password : undefined,
+          password: emp.password
+            ? await db.employee.getAdminHashedPassword(emp)
+            : undefined,
+          token: db.employee.getToken(emp),
           department: emp.department
             ? {
                 connect: { slug: emp.department.slug },
@@ -84,7 +87,7 @@ main()
     db.$disconnect();
   })
   .catch(async (err) => {
-    console.log("err: ", err);
+    console.log(chalk.red("err SEED: "), err);
     db.$disconnect();
     process.exit(1);
   });

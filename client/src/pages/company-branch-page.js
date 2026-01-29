@@ -1,6 +1,5 @@
 import { multiSetAttributes } from "@utils";
 import { getBranchData } from "../api/api.js";
-import { parseRequestUrl } from "@utils";
 
 class CompanyBranchPage {
   name;
@@ -9,15 +8,34 @@ class CompanyBranchPage {
   }
 
   async render() {
-    const request = parseRequestUrl();
-    /*   console.log('request BranchPage', request); */
-    let data;
-    if (typeof request.branchSlug === "undefined") {
-      data = await getBranchData();
-    } else {
-      data = await getBranchData(request.resource, request.branchSlug);
+    let departmentSlugString;
+    let branchSlugString;
+    let slugsFromUrl = document.location.hash
+      .slice(1)
+      .split("/")
+      .filter(Boolean);
+
+    if (slugsFromUrl.length > 1) {
+      [departmentSlugString, branchSlugString] = [
+        slugsFromUrl[0],
+        slugsFromUrl[2],
+      ];
     }
-    /*   console.log('data BRANCH', data); */
+    let result;
+    try {
+      if (typeof departmentSlugString === "undefined") {
+        result = await getBranchData();
+      } else {
+        result = await getBranchData(departmentSlugString, branchSlugString);
+      }
+    } catch (error) {
+      console.log("errorin companyBranchPage: ", error);
+    }
+
+    const { description, slug: branchSlug, employees, name } = result.data;
+
+    const isDepDesign =
+      branchSlug === "branchUiUx" || branchSlug === "branchEcommerce";
 
     const branchPage = document.createElement("section");
     branchPage.setAttribute("class", "branchPage");
@@ -25,42 +43,57 @@ class CompanyBranchPage {
     const container = document.createElement("div");
     container.setAttribute("class", "container");
 
-    const branchPageWrapper = document.createElement("div");
-    branchPageWrapper.setAttribute("class", "branchPage__wrapper");
-
-    const branchPageContent = document.createElement("div");
-    branchPageContent.setAttribute("class", "branchPage__content");
-
-    const branchPageTitle = document.createElement("h1");
-    branchPageTitle.setAttribute("class", "branchPage__title");
-    const branchPageTitleContent = document.createTextNode("Отдел: ");
-    const branchPageTitleSpan = document.createElement("span");
-    branchPageTitleSpan.textContent = "FRONTEND";
-    branchPageTitle.append(branchPageTitleContent, branchPageTitleSpan);
-
-    const branchPageEmployeeList = document.createElement("ul");
-    branchPageEmployeeList.setAttribute("class", "branchPage__employee-list");
-
-    branchPageEmployeeList.insertAdjacentHTML('afterbegin', `
-      <li class='branchPage__employee-item'>
-        <div clas='branchPage__employee-item-wrapper'>
-          <a class='branchPage__employee-link' href='/#/lala'>van Ivanov</a>
+    container.innerHTML = `
+      <div class='branchPage__wrapper'>
+        <div class='branchPage__inner'>
+          <h1 class='${
+            isDepDesign ? "branchPage__title depDesignBg" : "branchPage__title"
+          }'>${name}</h1>
+          <div class='branchPage__description'>
+            <p>${description}</p>
+          </div>
+          <div class='branchPage__employees'>
+            <p>Сотрудники отдела: </p>
+            <ul class='branchPage__employees-list'>
+              ${employees.map(
+                (emp) => `
+                  <li class='branchPage__employees-item'>
+                <div class='${
+                  isDepDesign
+                    ? "branchPage__employees-item-wrapper depDesignBg"
+                    : "branchPage__employees-item-wrapper"
+                }'>
+                  <p class='branchPage__employees-item-name'>${
+                    emp.first_name
+                  } ${emp.last_name}</p>
+                  <div class='branchPage__employees-item-info'>
+                    <div class='branchPage__employees-item-jobTitle'>
+                      <span>Должность:</span>
+                      <span>${emp.job_title}</span>
+                    </div>
+                    <div class='branchPage__employees-item-email'>
+                     <span>Email:</span>
+                     <span>${emp.email}</span>
+                  </div>
+                  <div class='branchPage__employees-item-phone'>
+                    <span>phone:</span>
+                    <span>${emp.tel}</span>
+                  </div>
+                  </div>
+                  <a href='/#${
+                    departmentSlugString ? "/" + departmentSlugString : ""
+                  }/${branchSlug}/employee-${emp.id}' 
+                  class='branchPage__employees-item-link'>На персональную страницу</a>
+                </div>
+              </li>
+                `
+              )}
+            </ul>
+          </div>
         </div>
-      </li>
-      <li class='branchPage__employee-item'>
-        <div clas='branchPage__employee-item-wrapper'>
-          <a class='branchPage__employee-link' href='/#/lala'>van Ivanov</a>
-        </div>
-      </li>
-    `)
+      </div>
+    `;
 
-    const branchPageEmployeeItem = document.createElement("li");
-    branchPageEmployeeItem.setAttribute("class", "branchPage__employee-item");
-
-    branchPageContent.append(branchPageTitle, branchPageEmployeeList);
-
-    branchPageWrapper.appendChild(branchPageContent);
-    container.appendChild(branchPageWrapper);
     branchPage.appendChild(container);
 
     return branchPage;

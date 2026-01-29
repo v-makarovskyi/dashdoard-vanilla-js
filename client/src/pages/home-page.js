@@ -95,7 +95,7 @@ class HomePage {
       "beforeend",
       `
       <div class='homePage__branches-item left'>
-        <a class='homePage__branches-link   href='/#/departmentWebDev/branches/${data.branchBack}'>
+        <a class='homePage__branches-link'   href='/#/departmentWebDev/branches/${data.branchBack}'>
           <span>backend отдел</span>
         </a>
         <div class='arrow arrow-branch left'></div>
@@ -162,8 +162,8 @@ class HomePage {
       "beforeend",
       `
       <div class='homePage__branches-item right'>
-        <a class='homePage__branches-link   href: '/#/departmentWebDesign/branches/${data.branchEcommerce}'>
-          <span>ecommerce отдел"</span>
+        <a class='homePage__branches-link'   href='/#/departmentWebDesign/branches/${data.branchEcommerce}'>
+          <span>ecommerce отдел</span>
         </a>
         <div class='arrow arrow-branch right'></div>
       </div>
